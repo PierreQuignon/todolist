@@ -1,22 +1,21 @@
 import * as React from "react";
-import { Todo } from "../App";
+import { Todo as todoType} from "../App";
+import Todo from "./Todo";
 
-interface ITodoContainerProps {
-  todos: Todo[];
+interface ITodoContainerProps {//Ceci sert au typage des props
+  todos: todoType[];
 }
+
 const TodoContainer: React.FunctionComponent<ITodoContainerProps> = ({
   todos,
 }) => {
-  todos.map((i: any) => {
-    return null;
-  });
 
   return (
     <>
       {
-        todos.map((i: any) => {
-          return null;
-          // return <Todo todo={todo}/>
+        todos.map((todo, index) => {
+          // return null;
+          return <Todo key={`${todo.title}-${index}`}  todo={todo}/>
         })
       }
     </>

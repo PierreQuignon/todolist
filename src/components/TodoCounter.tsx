@@ -4,6 +4,7 @@ import { Todo } from '../App';
 interface ITodoCounterProps {
   todos : Todo[]
 }
+
 const TodoCounter: React.FunctionComponent<ITodoCounterProps> = ({todos}) => {
 
   const todosLength = todos.length
