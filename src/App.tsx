@@ -10,20 +10,26 @@ export interface Todo {
   content: string;
 }
 
-export const fakeTodos = [
-  { id: 1, title: "learn React", done: false, content: "make app" },
-  { id: 2, title: "make food", done: false, content: "piemontaise" },
-  { id: 3, title: "do sport", done: true, content: "running" },
-];
-
-const App: FC = () => {
+const App: any = () => {
   const [todos, setTodos] = useState<Todo[] | []>([]); //le useState revoi une valeur de type array d'objet todo ou bien un array vide
-  console.log(todos);
 
+  fetch("./src/dataset.json")
+    .then((res) => res.json())//res peut être appelé comme on le souhaite
+    .then((resJson) => setTodos(resJson.data)// resJson peut être appelé comme on le souhaite, data est target grace au console log
+    )
+
+
+  if (todos.length === 0) {
+    return <div>loading...</div>;
+  }
   return (
     <>
-      <button onClick={() => setTodos(fakeTodos)}>Charger les Todos</button>
-      <p>{todos.length === 0 ? 'les dotos ne sont pas chargées':'Les todos sont chargées'}</p>
+      <button onClick={() => setTodos([])}>Charger les Todos</button>
+      <p>
+        {todos.length === 0
+          ? "les dotos ne sont pas chargées"
+          : "Les todos sont chargées"}
+      </p>
       <TodoCounter todos={todos} />
       <TodoContainer todos={todos} />
       <TodoAdder setTodos={setTodos} />
