@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import TodoAdder from "./components/TodoAdder";
 import TodoContainer from "./components/TodoContainer";
 import TodoCounter from "./components/TodoCounter";
+import "./index.css";
 
 export interface Todo {
   id: number;
@@ -26,15 +27,19 @@ const App: any = () => {
 
   return (
     <>
-      <p>
-        {todos.length === 0
-          ? "Les todos ne sont pas chargées"
-          : "Les todos sont chargées"}
-      </p>
-      <button onClick={() => setClicked(true)}>Charger des Todos</button>
-      <TodoCounter todos={todos} />
-      <TodoContainer todos={todos} />
-      <TodoAdder setTodos={setTodos} />
+      <div className="flex justify-center p-5 m-5 gap-5">
+        <div className="w-1/3">
+          <TodoAdder setTodos={setTodos} />
+        </div>
+        <div className=" flex text-center border border-black p-5 rounded w-2/3 gap-5">
+          <div className="w-4/5">
+            <TodoContainer todos={todos} setClicked={setClicked} />
+          </div>
+          <div className="w-1/5">
+            <TodoCounter todos={todos} />
+          </div>
+        </div>
+      </div>
     </>
   );
 };
